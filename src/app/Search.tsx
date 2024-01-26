@@ -1,39 +1,102 @@
 "use client"
-import axios from "axios"
-import React, { useState } from "react"
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Place } from "./Type";
 
+const Search: React.FC = () => {
+  const [travelPlace, setTravelPlace] = useState<Place[] | null>(null);
+  const [keyword, setKeyword] = useState<string>("");
+  const [keywordArray, setKeywordArray] = useState<string[]>([]);
 
-
-
-const Search:React.FC = () => {
-    const [travelPlace, setTravelPlace] = useState<Place[] | null>(null);
-    const [keyword, setKeyword] = useState("");
-
-    const btnClick = () => {        
-        axios.post("http://localhost:8080/", {
-            keyword: keyword
-        })
-        .then((res) => {
-            console.log(res.data);
-            setTravelPlace(res.data);
-        })
-        .catch((err) => {
-            console.error(err);
-        })
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.key === 'Enter') {
+      enterKeyword();
+    } else if (e.key === 'Backspace') {
+      // 백스페이스 처리
+      if (keyword !== '') {
+        // 입력이 비어 있지 않으면 입력의 마지막 글자를 제거
+        setKeyword((prevKeyword) => prevKeyword.slice(0, -1));
+      }
     }
+  };
 
-    return(
-        <div>
-            <input type="text" onChange={(e) => setKeyword(e.target.value)} />
-            <button onClick={btnClick}>전송</button>
-        <ul>
-        {travelPlace?.map((place: Place) => (
-          <li key={place.contentid}>{place.title}</li>
-        ))}
-      </ul>
-      </div>
-    );
-}
+  const enterKeyword = () => {
+    if (keyword.trim() !== "" && keywordArray.length < 3) {
+      setKeywordArray((prevArray) => [...prevArray, keyword.trim()]);
+      setKeyword(""); // 입력 후 키워드 초기화
+    }
+  };
+
+  useEffect(() => {
+    console.log(keywordArray);
+  }, [keywordArray]);
+
+  const removeKeyword = (index: number) => {
+    setKeywordArray((prevArray) => {
+      const newArray = [...prevArray];
+      newArray.splice(index, 1);
+      return newArray;
+    });
+  };
+
+  const sendBtnClick = () => {
+    axios
+      .post("http://localhost:8080/", {
+        keyword: keywordArray,
+      })
+      .then((res) => {
+        console.log(res.data);
+        setTravelPlace(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  return (
+    <div className="w-2/3 mx-auto p-4">
+        <form className="pb-10">
+            <input
+                        type="text"
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        onKeyDown={(e) => handleKeyDown(e)}
+                        className="w-full border p-2 rounded-full mb-4 focus:outline-none focus:border-blue-500"
+                        placeholder={keywordArray.length >= 3 ? "더 이상 입력하실 수 없습니다." : "키워드를 입력하세요."}
+                        disabled={keywordArray.length >= 3}
+            />
+        </form>
+
+        <div className="flex flex-row items-center border justify-between p-4 rounded-lg bg-white">
+            <div className="mr-4">
+                <p className="text-lg">{keywordArray.length}/3</p>
+            </div>
+            <div className="mr-4 flex flex-row">
+                <p className="mr-2 font-semibold text-gray-400">나는 이번 여행에서</p>
+                {keywordArray.map((kw, index) => (
+                    <div key={index} className="px-1">
+                        <button
+                            onClick={() => removeKeyword(index)}
+                            className="bg-gray-300 text-gray-700 py-1 px-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-300"
+                        >
+                            {kw}
+                        </button>
+                    </div>
+                ))}
+                <p className="ml-2 font-semibold text-gray-400">(을/를)하고 싶어</p>
+            </div>
+            <div>
+                <button
+                    onClick={sendBtnClick}
+                    className="bg-green-500 text-white py-2 px-4 rounded-md ml-2 hover:bg-green-600 focus:outline-none focus:ring focus:border-green-300"
+                >
+                    여행지 찾기
+                </button>
+            </div>
+        </div>
+    </div>
+  );
+};
 
 export default Search;

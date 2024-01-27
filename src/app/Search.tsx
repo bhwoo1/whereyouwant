@@ -2,13 +2,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Place } from "./Type";
+import { useRecoilState } from "recoil";
+import { KeywordArrayAtom } from "@/Recoil/RecoilContext";
 
 const Search: React.FC = () => {
   const [travelPlace, setTravelPlace] = useState<Place[] | null>(null);
   const [keyword, setKeyword] = useState<string>("");
-  const [keywordArray, setKeywordArray] = useState<string[]>([]);
+  const [keywordArray, setKeywordArray] = useRecoilState(KeywordArrayAtom);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(e.key);
     e.preventDefault();
     if (e.key === 'Enter') {
       enterKeyword();

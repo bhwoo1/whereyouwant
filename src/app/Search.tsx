@@ -46,11 +46,11 @@ const Search: React.FC = () => {
   const sendBtnClick = () => {
     axios
       .post("http://localhost:8080/", {
-        keyword: keywordArray,
+        keywordArray: keywordArray,
       })
       .then((res) => {
         console.log(res.data);
-        setTravelPlace(res.data);
+        // setTravelPlace(res.data);
       })
       .catch((err) => {
         console.error(err);

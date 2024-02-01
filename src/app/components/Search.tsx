@@ -1,14 +1,16 @@
 "use client"
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Place } from "./Type";
 import { useRecoilState } from "recoil";
-import { KeywordArrayAtom } from "@/Recoil/RecoilContext";
+import { KeywordArrayAtom, TravelPlaceAtom } from "@/Recoil/RecoilContext";
+import { useRouter } from 'next/navigation';
+import axios from "axios";
 
 const Search: React.FC = () => {
-  const [travelPlace, setTravelPlace] = useState<Place[] | null>(null);
   const [keyword, setKeyword] = useState<string>("");
   const [keywordArray, setKeywordArray] = useRecoilState(KeywordArrayAtom);
+  const [travelPlace, setTravelPlace] = useRecoilState(TravelPlaceAtom);
+  const router = useRouter();
+
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     console.log(e.key);
@@ -31,9 +33,6 @@ const Search: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(keywordArray);
-  }, [keywordArray]);
 
   const removeKeyword = (index: number) => {
     setKeywordArray((prevArray) => {
@@ -44,17 +43,24 @@ const Search: React.FC = () => {
   };
 
   const sendBtnClick = () => {
-    axios
-      .post("http://localhost:8080/", {
+    if(keywordArray.length === 0) {
+      alert("키워드를 1개 이상 입력해주세요!");
+    }
+    else {
+      // router.push("/loading");
+      axios.post("http://localhost:8080/", {
         keywordArray: keywordArray,
       })
       .then((res) => {
-        console.log(res.data);
-        // setTravelPlace(res.data);
+        setTravelPlace(res.data);
+        router.push("/loading");
+        console.log(travelPlace);
       })
       .catch((err) => {
         console.error(err);
       });
+    }
+    
   };
 
   return (

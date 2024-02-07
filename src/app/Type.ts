@@ -1,4 +1,20 @@
+export type KeywordCounts = {
+    [keyword: string]: number;
+  };
+
 export type Place = {
     key: string,
-    count: number
+    count: number,
+    keywordCounts: KeywordCounts,
+    areacode: string,
+    sigungucode: string
 }
+
+export type AreaJsonType = {
+    [key: string]: {
+        name: string;
+        sigungucode: {
+            [key: string]: string;
+        };
+    };
+};

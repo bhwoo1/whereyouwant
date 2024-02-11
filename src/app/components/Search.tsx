@@ -104,6 +104,9 @@ const Search: React.FC = () => {
                 </button>
             </div>
         </div>
+        <div className="pt-4">
+          <p className="font-semibold text-gray-500">※ 키워드에 따라 원하시는 결과가 검색되지 않을 수도 있으니 주의해주세요</p>
+        </div>
     </div>
   );
 };

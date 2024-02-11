@@ -1,6 +1,6 @@
 "use client"
 import { TravelPlaceAtom } from "@/Recoil/RecoilContext";
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilValue } from "recoil";
 import PlaceComponent from "../components/PlaceComponent";
 
 export default function Loading() {

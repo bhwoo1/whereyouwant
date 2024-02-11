@@ -16,7 +16,7 @@ const PlaceComponent: React.FC<Props> = (props: Props) => {
             <p className="text-lg text-gray-700">{areaJsonTyped[place.areacode]?.name}</p>
             <p className="text-lg font-bold">{areaJsonTyped[place.areacode]?.sigungucode[place.sigungucode]}</p>
             <div className="mt-4">
-                <p>키워드 검색 결과</p>
+                <p className="font-semibold">키워드 검색 결과</p>
                 <ul>
                     {keywordCountEntries.map(([keyword, count]) => (
                         <li key={keyword} className="text-base">

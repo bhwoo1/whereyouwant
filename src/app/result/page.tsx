@@ -21,15 +21,18 @@ export default function Loading() {
                 <p className="text-xl font-bold">당신께 추천하는 여행지는...</p>
                 <PlaceComponent place={firstPlace} />
             </div>
-            <div className="mb-8">
-                <p className="text-xl font-bold">이런 여행지는 어때요?</p>
-                {secondToFifthPlaces.map((place) => (
-                    <div key={place.count} className="mt-4">
-                        <PlaceComponent place={place} />
-                    </div>
-                ))}
-            </div>
-            <div>
+            {secondToFifthPlaces && 
+                <div className="mb-8">
+                    <p className="text-xl font-bold">이런 여행지는 어때요?</p>
+                    {secondToFifthPlaces.map((place) => (
+                        <div key={place.count} className="mt-4">
+                            <PlaceComponent place={place} />
+                        </div>
+                    ))}
+                </div>
+            }
+            {sixthToTenthPlaces &&
+                <div>
                 <p className="text-xl font-bold">이런 여행지도 있어요!</p>
                 {sixthToTenthPlaces.map((place) => (
                     <div key={place.count} className="mt-4">
@@ -37,6 +40,7 @@ export default function Loading() {
                     </div>
                 ))}
             </div>
+            }
         </div>
     );
 }

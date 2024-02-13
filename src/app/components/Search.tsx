@@ -48,8 +48,10 @@ const Search: React.FC = () => {
     }
     else {
       // router.push("/loading");
-      axios.post("http://localhost:8080/", {
+      axios.post("https://port-0-whereyouwant-server-azyqdr152alrr7lty8.sel5.cloudtype.app/", {
         keywordArray: keywordArray,
+      }, {
+        withCredentials: true
       })
       .then((res) => {
         setTravelPlace(res.data);

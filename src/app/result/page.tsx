@@ -10,10 +10,10 @@ export default function Loading() {
     const firstPlace = travelPlace[0];
 
     // 두번째부터 다섯번째 요소
-    const secondToFifthPlaces = travelPlace.slice(1, 5);
+    const secondToFifthPlaces = travelPlace?.slice(1, 5);
 
     // 여섯번째부터 열번째 요소
-    const sixthToTenthPlaces = travelPlace.slice(5, 10);
+    const sixthToTenthPlaces = travelPlace?.slice(5, 10);
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">

@@ -8,8 +8,17 @@ type Props = {
 
 const PlaceComponent: React.FC<Props> = (props: Props) => {
     const { place } = props;
-    const keywordCountEntries = Object.entries(props.place.keywordCounts);
+
+    
+    // place 객체가 없거나 keywordCounts가 없는 경우 처리
+    if (!place || !place.keywordCounts) {
+        return <div>Keyword counts not available</div>;
+    }
+    
+    const keywordCountEntries = place && place.keywordCounts ? Object.entries(place.keywordCounts) : [];
     const areaJsonTyped = areaJson as AreaJsonType;
+
+    
 
     return(
         <div className="bg-gray-100 p-4 rounded-md shadow-md bg-white">

@@ -1,5 +1,5 @@
 export type KeywordCounts = {
-    [keyword: string]: number;
+    [keyword: string]: number | undefined;
   };
 
 export type Place = {

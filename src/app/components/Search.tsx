@@ -13,7 +13,6 @@ const Search: React.FC = () => {
 
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    console.log(e.key);
     e.preventDefault();
     if (e.key === 'Enter') {
       enterKeyword();
@@ -48,7 +47,8 @@ const Search: React.FC = () => {
     }
     else {
       // router.push("/loading");
-      axios.post("http://3.39.11.80:8080/", {
+      // axios.post("http://3.39.11.80:8080/", {
+      axios.post("http://localhost:8080/", {
         keywordArray: keywordArray,
       }, {
         withCredentials: true
@@ -56,7 +56,6 @@ const Search: React.FC = () => {
       .then((res) => {
         setTravelPlace(res.data);
         router.push("/loading");
-        console.log(travelPlace);
       })
       .catch((err) => {
         console.error(err);
@@ -86,7 +85,7 @@ const Search: React.FC = () => {
             <div className="mr-4 flex flex-row">
                 <p className="mr-2 font-semibold text-gray-400">나는 이번 여행에서</p>
                 {keywordArray.map((kw, index) => (
-                    <div key={index} className="px-1">
+                    <div key={kw} className="px-1">
                         <button
                             onClick={() => removeKeyword(index)}
                             className="bg-gray-300 text-gray-700 py-1 px-2 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-300"

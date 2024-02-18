@@ -9,7 +9,7 @@ export default function Result() {
 
     useEffect(() => {
         console.log(travelPlace);
-    }, []);
+    }, [travelPlace]);
     // 첫번째 요소
     const firstPlace = travelPlace[0];
 

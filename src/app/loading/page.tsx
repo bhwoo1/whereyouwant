@@ -12,20 +12,19 @@ export default function Loading() {
   const travelPlace = useRecoilValue(TravelPlaceAtom);
 
   useEffect(() => {
-    // const interval = setInterval(() => {
-    //   setCountdown((prevCountdown) => prevCountdown - 1);
-    // }, 1000);
+    const interval = setInterval(() => {
+      setCountdown((prevCountdown) => prevCountdown - 1);
+    }, 1000);
 
-    // const timeout = setTimeout(() => {
-    //   // 5초 후에 결과 페이지로 이동
-    //   router.push("/result");
-    // }, 5000);
+    const timeout = setTimeout(() => {
+      // 5초 후에 결과 페이지로 이동
+      router.push("/result");
+    }, 5000);
 
-    // return () => {
-    //   clearInterval(interval);
-    //   clearTimeout(timeout);
-    // };
-    console.log(travelPlace);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
   }, [router]);
 
 

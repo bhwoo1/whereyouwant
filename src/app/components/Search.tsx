@@ -53,14 +53,12 @@ const Search: React.FC = () => {
       .then((res) => {
         setTravelPlace(res.data);
         // console.log(res.data);
-        // router.push("/loading");
+        router.push("/loading");
       })
       .catch((err) => {
         console.error(err);
       });
     }
-
-    console.log(travelPlace);
     
   };
 

@@ -59,6 +59,8 @@ const Search: React.FC = () => {
         console.error(err);
       });
     }
+
+    console.log(travelPlace);
     
   };
 

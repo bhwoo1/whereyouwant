@@ -52,7 +52,7 @@ const Search: React.FC = () => {
       })
       .then((res) => {
         setTravelPlace(res.data);
-        alert(travelPlace);
+        alert(res.data);
         router.push("/loading");
       })
       .catch((err) => {

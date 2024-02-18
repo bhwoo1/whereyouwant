@@ -42,7 +42,6 @@ const Search: React.FC = () => {
   };
 
   const sendBtnClick = () => {
-    console.log(travelPlace);
     if(keywordArray.length === 0) {
       alert("키워드를 1개 이상 입력해주세요!");
     }
@@ -54,14 +53,12 @@ const Search: React.FC = () => {
       .then((res) => {
         setTravelPlace(res.data);
         console.log(res.data);
-        
+        console.log(travelPlace);
         // router.push("/loading");
       })
       .catch((err) => {
         console.error(err);
       });
-
-      console.log(travelPlace);
     }
     
   };

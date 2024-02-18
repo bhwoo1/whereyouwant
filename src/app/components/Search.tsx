@@ -51,6 +51,7 @@ const Search: React.FC = () => {
         keywordArray: keywordArray,
       })
       .then((res) => {
+        console.log(travelPlace);
         setTravelPlace(res.data);
         console.log(res.data);
         console.log(travelPlace);

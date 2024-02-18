@@ -47,8 +47,7 @@ const Search: React.FC = () => {
     }
     else {
       // router.push("/loading");
-      //axios.post("http://3.39.11.80:8080/", {
-      axios.post("https://whereyouwant-server.com/", {
+      axios.post("http://3.39.11.80:8080/", {
         keywordArray: keywordArray,
       }, {
         withCredentials: true

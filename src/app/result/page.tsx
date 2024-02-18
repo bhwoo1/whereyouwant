@@ -2,15 +2,14 @@
 import { TravelPlaceAtom } from "@/Recoil/RecoilContext";
 import { useRecoilValue } from "recoil";
 import PlaceComponent from "../components/PlaceComponent";
+import { useEffect } from "react";
 
 export default function Result() {
     const travelPlace = useRecoilValue(TravelPlaceAtom);
 
-    // travelPlace가 null 또는 undefined인 경우를 처리
-    if (!travelPlace) {
-        return <div>Loading...</div>;
-    }
-
+    useEffect(() => {
+        console.log(travelPlace);
+    }, []);
     // 첫번째 요소
     const firstPlace = travelPlace[0];
 

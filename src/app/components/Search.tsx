@@ -46,12 +46,9 @@ const Search: React.FC = () => {
       alert("키워드를 1개 이상 입력해주세요!");
     }
     else {
-      // router.push("/loading");
       //axios.post("http://3.39.11.80:8080/", {
       axios.post("https://whereyouwant-server.com/", {
         keywordArray: keywordArray,
-      }, {
-        withCredentials: true
       })
       .then((res) => {
         setTravelPlace(res.data);

@@ -7,10 +7,7 @@ import { useEffect } from "react";
 export default function Result() {
     const travelPlace = useRecoilValue(TravelPlaceAtom);
 
-    useEffect(() => {
-        console.log(travelPlace);
-    }, [travelPlace]);
-    
+
     // 첫번째 요소
     const firstPlace = travelPlace[0];
 

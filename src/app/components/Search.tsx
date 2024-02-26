@@ -57,6 +57,7 @@ const Search: React.FC = () => {
       })
       .catch((err) => {
         console.error(err);
+        alert("검색에 실패했습니다! 다른 키워드를 입력해보세요.")
       });
     }
     
